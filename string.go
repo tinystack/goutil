@@ -11,4 +11,3 @@ import (
 func JoinStrings(multiString ...string) string {
     return strings.Join(multiString, "")
 }
-
