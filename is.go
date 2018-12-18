@@ -7,6 +7,7 @@ package goutil
 import (
     "strings"
     "net"
+    "regexp"
 )
 
 func IsInteger(val interface{}) bool {
@@ -39,4 +40,16 @@ func IsIp(s string) bool {
         return false
     }
     return true
+}
+
+func IsEmail(s string) bool {
+    pattern := `^[0-9A-Za-z][\.\-_0-9A-Za-z]*\@[0-9A-Za-z\-]+(\.[0-9A-Za-z]+)+$`
+    reg := regexp.MustCompile(pattern)
+    return reg.MatchString(s)
+}
+
+func IsMobile(s string) bool {
+    pattern := `^1[3456789]\d{9}$`
+    reg := regexp.MustCompile(pattern)
+    return reg.MatchString(s)
 }
