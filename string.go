@@ -10,11 +10,17 @@ import (
     "math/rand"
     "crypto/md5"
     "encoding/hex"
+    "encoding/json"
     "time"
+    "sort"
 )
 
 func JoinStrings(multiString ...string) string {
     return strings.Join(multiString, "")
+}
+
+func JoinSepStrings(sep string, multiString ...string) string {
+    return strings.Join(multiString, sep)
 }
 
 func JoinIntSlice2String(intSlice []int, sep string) string {
@@ -58,8 +64,12 @@ func Str2Int(s string) int {
     return i
 }
 
+func Int2Str(i int) string {
+    return strconv.Itoa(i)
+}
+
 func StrRandom(l int) string {
-    str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*"
+    str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	bytes := []byte(str)
 	result := []byte{}
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -73,4 +83,20 @@ func StrMd5(s string) string {
     md5Ctx := md5.New()
     md5Ctx.Write([]byte(s))
     return hex.EncodeToString(md5Ctx.Sum(nil))
+}
+
+func StringSliceRsort(s []string) []string {
+    sort.Strings(s)
+    for from, to := 0, len(s)-1; from < to; from, to = from + 1, to - 1 {
+        s[from], s[to] = s[to], s[from]
+    }
+    return s
+}
+
+func JsonEncode(obj interface{}) (string, error) {
+    jsonBytes, err := json.Marshal(obj)
+    if err != nil {
+        return "", err
+    }
+    return string(jsonBytes), nil
 }
