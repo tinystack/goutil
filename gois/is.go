@@ -19,16 +19,16 @@ func IsInteger(val interface{}) bool {
             return false
         }
         str = strings.TrimSpace(str)
-		if str[0] == '-' || str[0] == '+' {
-			if len(str) == 1 {
-				return false
-			}
-			str = str[1:]
-		}
+        if str[0] == '-' || str[0] == '+' {
+            if len(str) == 1 {
+                return false
+            }
+            str = str[1:]
+        }
         for _, v := range str {
             if v < '0' || v > '9' {
-				return false
-			}
+                return false
+            }
         }
     }
     return true
