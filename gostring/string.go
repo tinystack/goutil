@@ -102,6 +102,10 @@ func JsonEncode(obj interface{}) (string, error) {
     return string(jsonBytes), nil
 }
 
+func JsonDecode(jsonString string, obj interface{}) error {
+    return json.Unmarshal([]byte(jsonString), obj)
+}
+
 func Base64Encode(b []byte) string {
     return base64.StdEncoding.EncodeToString(b)
 }
@@ -119,3 +123,4 @@ func Base64UrlDecode(s string) ([]byte, error) {
     ds, err := base64.URLEncoding.DecodeString(s)
     return ds, err
 }
+
