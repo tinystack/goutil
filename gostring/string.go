@@ -53,8 +53,9 @@ func IntSlice2StrSlice(intSlice []int) []string {
 func StrFilterSliceEmpty(strSlice []string) []string {
     var filterSlice []string
     for _, s := range strSlice {
-        if s != "" {
-            filterSlice = append(filterSlice, s)
+        ss := strings.TrimSpace(s)
+        if ss != "" {
+            filterSlice = append(filterSlice, ss)
         }
     }
     return filterSlice
